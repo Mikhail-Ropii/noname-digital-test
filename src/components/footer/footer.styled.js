@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 
 export const FooterCont = styled.div`
+  max-width: 1280px;
   padding-top: 60px;
   padding-bottom: 60px;
   background-color: #2f303a;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const ContactsWrap = styled.div`
@@ -75,4 +78,8 @@ export const SubscribeBtn = styled.button`
   letter-spacing: 0.06em;
 
   color: #ffffff;
+  transition: 0.35s;
+  :hover {
+    background-color: #188ce8;
+  }
 `;

@@ -9,7 +9,9 @@ const Home = lazy(() => import('../pages/home/Home'));
 const SignUp = lazy(() => import('../pages/signUp/SignUp'));
 const SignIn = lazy(() => import('../pages/signIn/SignIn'));
 const ProductList = lazy(() => import('../pages/productList/ProductList'));
-const ProductCard = lazy(() => import('../pages/productCard/ProductCard'));
+const ProductInfo = lazy(() => import('../pages/productInfo/ProductInfo'));
+const Cart = lazy(() => import('../pages/cart/Cart'));
+const Account = lazy(() => import('../pages/account/Account'));
 
 export const AppRoutes = () => {
   // const isRefreshingUser = useSelector(authSelectors.getIsRefreshingUser);
@@ -25,7 +27,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />}></Route>
           <Route path="products" element={<ProductList />} />
-          <Route path="products:id" element={<ProductCard />} />
+          <Route path="products/:id" element={<ProductInfo />} />
           <Route
             path="signup"
             element={
@@ -46,7 +48,7 @@ export const AppRoutes = () => {
             path="account"
             element={
               <PrivatRoute>
-                <ProductCard />
+                <Account />
               </PrivatRoute>
             }
           />
@@ -54,7 +56,7 @@ export const AppRoutes = () => {
             path="cart"
             element={
               <PrivatRoute>
-                <ProductCard />
+                <Cart />
               </PrivatRoute>
             }
           />
