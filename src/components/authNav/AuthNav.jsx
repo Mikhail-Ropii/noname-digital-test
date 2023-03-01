@@ -1,10 +1,10 @@
-import { NavLink } from 'react-router-dom';
+import { NavLinkStyle } from 'components/common.styled';
 
 export const AuthNav = () => {
   return (
     <div>
-      <NavLink to="/signin">Войти</NavLink>
-      <NavLink to="/signup">Регистрация</NavLink>
+      <NavLinkStyle to="signin">Войти</NavLinkStyle>
+      <NavLinkStyle to="signup">Регистрация</NavLinkStyle>
     </div>
   );
 };
