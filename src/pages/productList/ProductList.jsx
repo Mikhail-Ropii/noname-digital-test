@@ -1,7 +1,12 @@
 import data from '../../data';
 import { ProductCard } from '../../components/productCard/ProductCard';
 import { Container } from 'components/common.styled';
-import { ProductItem, ListContainer, SortWrap } from './productList.styled';
+import {
+  ProductItem,
+  ListContainer,
+  SortWrap,
+  Title,
+} from './productList.styled';
 import { useState } from 'react';
 
 const ProductList = () => {
@@ -41,6 +46,7 @@ const ProductList = () => {
 
   return (
     <Container>
+      <Title>Товары</Title>
       <SortWrap>
         <form>
           <select

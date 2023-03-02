@@ -16,3 +16,8 @@ export const SortWrap = styled.div`
   gap: 10px;
   margin-bottom: 15px;
 `;
+
+export const Title = styled.h1`
+  margin-bottom: 15px;
+  text-align: center;
+`;
