@@ -5,9 +5,11 @@ import { UserMenu } from 'components/userMenu/UserMenu';
 import { HeaderContainer } from './layout.styled';
 import { Footer } from 'components/footer/Footer';
 import { Container } from 'components/common.styled';
+import { useSelector } from 'react-redux';
 
 const Layout = () => {
-  const isLoggedIn = true;
+  const { isLoggedIn } = useSelector(state => state.auth);
+
   return (
     <>
       <Container>

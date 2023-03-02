@@ -11,6 +11,8 @@ import {
   GoogleIcon,
 } from 'components/common.styled';
 import { AuthorizationBlock } from 'components/common.styled';
+import { useDispatch } from 'react-redux';
+import { authSignIn, signInWithGoogle } from 'redux/authOperations';
 
 const initialValues = {
   email: '',
@@ -30,11 +32,11 @@ const schema = yup.object().shape({
 });
 
 const SignIn = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
-    // dispatch(operations.logIn({ email, password }));
-    // resetForm();
+    dispatch(authSignIn({ email, password }));
+    resetForm();
   };
 
   return (
@@ -61,7 +63,7 @@ const SignIn = () => {
         </FormStyle>
       </Formik>
       <AuthorizationText>или</AuthorizationText>
-      <GoogleBtn type="submit">
+      <GoogleBtn onClick={signInWithGoogle}>
         <GoogleIcon
           src="https://img.icons8.com/color/48/null/google-logo.png"
           width={20}

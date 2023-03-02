@@ -11,15 +11,16 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { authSlice } from './authReducer';
+import { cartSlice } from './cartReducer';
 
 const authPersistConfig = {
-  key: 'cart',
+  key: 'root',
   storage,
 };
 
-const persistedAuthReducer = persistReducer(
+const persistedCartReducer = persistReducer(
   authPersistConfig,
-  authSlice.reducer
+  cartSlice.reducer
 );
 
 export const store = configureStore({
@@ -30,8 +31,8 @@ export const store = configureStore({
       },
     }),
   reducer: {
-    cart: authSlice.reducer,
-    auth: persistedAuthReducer,
+    cart: persistedCartReducer,
+    auth: authSlice.reducer,
   },
 });
 export const persistor = persistStore(store);

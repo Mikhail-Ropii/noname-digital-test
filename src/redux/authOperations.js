@@ -1,12 +1,23 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { auth } from '../../firebase/config';
+import { auth, googleSignIn } from '../firebase/config';
 import { authSlice } from './authReducer';
+
+export const signInWithGoogle = async ({ dispatch }) => {
+  try {
+    const { user } = await googleSignIn();
+    dispatch(
+      authSlice.actions.updateUserProfile({
+        userEmail: user.email,
+        userId: user.uid,
+      })
+    );
+  } catch (error) {}
+};
 
 export const authSignIn =
   ({ email, password }) =>
@@ -15,36 +26,32 @@ export const authSignIn =
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       dispatch(
         authSlice.actions.updateUserProfile({
+          userEmail: user.email,
           userId: user.uid,
-          userName: user.displayName,
         })
       );
-      dispatch(authSlice.actions.stateChange({ stateChange: true }));
+      dispatch(authSlice.actions.stateChange({ isLoggedIn: true }));
     } catch (error) {
       console.log(error);
     }
   };
 
 export const authSignUp =
-  ({ inputState, avatar }) =>
+  ({ email, password }) =>
   async (dispatch, getState) => {
-    const { email, password } = inputState;
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(auth.currentUser, {
-        displayName: inputState.login,
-        photoURL: avatar,
-      });
-      const user = auth.currentUser;
-      const { uid, displayName, photoURL } = user;
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       dispatch(
         authSlice.actions.updateUserProfile({
-          userId: uid,
-          userName: displayName,
-          avatar: photoURL,
+          userId: user.uid,
+          userEmail: user.email,
         })
       );
-      dispatch(authSlice.actions.stateChange({ stateChange: true }));
+      dispatch(authSlice.actions.stateChange({ isLoggedIn: true }));
     } catch (error) {
       console.log(error);
     }
@@ -53,17 +60,15 @@ export const authSignUp =
 export const authChangeUser = () => async (dispatch, getState) => {
   try {
     onAuthStateChanged(auth, user => {
-      console.log(user);
       if (user) {
         dispatch(
           authSlice.actions.updateUserProfile({
             userId: user.uid,
-            userName: user.displayName,
-            avatar: user.photoURL,
+            userEmail: user.email,
           })
         );
 
-        dispatch(authSlice.actions.stateChange({ stateChange: true }));
+        dispatch(authSlice.actions.stateChange({ isLoggedIn: true }));
       }
     });
   } catch (error) {

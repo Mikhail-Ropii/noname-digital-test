@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from 'redux/store';
 import { AppRoutes } from './AppRoutes';
+import { NotificationContainer } from 'react-notifications';
 
 export function App() {
   return (
@@ -13,6 +14,7 @@ export function App() {
           <AppRoutes />
         </BrowserRouter>
       </PersistGate>
+      <NotificationContainer />
     </Provider>
   );
 }

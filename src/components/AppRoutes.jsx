@@ -1,8 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { lazy, Suspense } from 'react';
 import { PrivatRoute } from './PrivatRoute';
 import { PublicRoute } from './PublicRoute';
+import { useEffect } from 'react';
+import { authChangeUser } from '../redux/authOperations';
 
 const Layout = lazy(() => import('../pages/layout/Layout'));
 const Home = lazy(() => import('../pages/home/Home'));
@@ -14,12 +16,10 @@ const Cart = lazy(() => import('../pages/cart/Cart'));
 const Account = lazy(() => import('../pages/account/Account'));
 
 export const AppRoutes = () => {
-  // const isRefreshingUser = useSelector(authSelectors.getIsRefreshingUser);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(operations.refreshUser());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authChangeUser());
+  }, [dispatch]);
 
   return (
     <Suspense>
