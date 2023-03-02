@@ -7,8 +7,8 @@ export const ListContainer = styled.div`
 export const ProductItem = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 18px;
-  row-gap: 18px;
+  column-gap: 17px;
+  row-gap: 17px;
 `;
 
 export const SortWrap = styled.div`
